@@ -52,11 +52,29 @@ def catalog_age_stats(movies, current_year=2026):
 def duration_in_hours(minutes):
     return f"{minutes // 60}ч {minutes % 60}м"
 
-# Stage 1
-print(average_rating(movies))
+# Stage 2
+def rating_tier(rating):
+    if rating >= 9:
+        return "шедевр"
+    elif rating >= 7:
+        return "хорошо"
 
-print(catalog_age_stats(movies))
+    return "средне" if rating >= 5 else "слабо"
 
-print(duration_in_hours(125))
+def decade_label(year):
+    match year:
+        case _ if year > 2020:
+            return "новые"
+        case _ if year <= 2020 and year >= 2015:
+            return "недавние"
+        case _ if year < 2015:
+            return "старые"
 
-print("Hello from catalog_analysis.py!")
+print("Этап 1")
+print(f"average_rating(movies): {average_rating(movies)}")
+print(f"catalog_age_stats(movies): {catalog_age_stats(movies)}")
+print(f"duration_in_hours(125): {duration_in_hours(125)}")
+
+print("\nЭтап 2")
+print(f"rating_tier(7): {rating_tier(7)}")
+print(f"decade_label(2017): {decade_label(2017)}")
