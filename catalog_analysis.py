@@ -102,6 +102,28 @@ def count_long_movies(movies, threshold=120):
 
     return count_movies
 
+# Stage 4
+def normalize_title(title):
+    normalized_words = []
+
+    for word in title.split():
+        normalized_words.append(word[0].upper() + word[1:])
+
+    return " ".join(normalized_words)
+
+def make_slug(title):
+    return title.lower().replace(" ", "-")
+
+def format_report_line(movie):
+    title = normalize_title(movie["title"])
+    duration = duration_in_hours(movie["duration_min"])
+    genres = ", ".join(sorted(movie["genres"]))
+
+    return (
+        f'"{title}" ({movie["year"]}) — {movie["rating"]}/10, '
+        f"{duration}, жанры: {genres}"
+    )
+
 print("Этап 1")
 print(f"average_rating(movies): {average_rating(movies)}")
 print(f"catalog_age_stats(movies): {catalog_age_stats(movies)}")
@@ -120,3 +142,8 @@ print(
     f"{find_first_masterpiece(movies[:7])}"
 )
 print(f"count_long_movies(movies): {count_long_movies(movies)}")
+
+print("\nЭтап 4")
+print(f'normalize_title("silent hours"): {normalize_title("silent hours")}')
+print(f'make_slug("Silent Hours"): {make_slug("Silent Hours")}')
+print(f"format_report_line(movies[7]): {format_report_line(movies[7])}")
