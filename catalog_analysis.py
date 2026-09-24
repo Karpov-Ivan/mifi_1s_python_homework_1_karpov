@@ -193,6 +193,12 @@ def common_actors(movie1, movie2):
 def genres_only_in_one(movies_a, movies_b):
     return all_genres(movies_a) - all_genres(movies_b)
 
+# Stage 8
+def iter_high_rated(movies, min_rating=8.0):
+    for movie in movies:
+        if movie["rating"] >= min_rating:
+            yield movie
+
 print("Этап 1")
 print(f"average_rating(movies): {average_rating(movies)}")
 print(f"catalog_age_stats(movies): {catalog_age_stats(movies)}")
@@ -233,3 +239,13 @@ print(
     "genres_only_in_one(movies[5:6], movies[:5]): "
     f"{genres_only_in_one(movies[5:6], movies[:5])}"
 )
+
+print("\nЭтап 8")
+print("iter_high_rated(movies):")
+for movie in iter_high_rated(movies):
+    print(format_report_line(movie))
+
+total_duration = sum(
+    movie["duration_min"] for movie in movies if movie["rating"] > 7
+)
+print(f"total_duration: {total_duration} мин")
