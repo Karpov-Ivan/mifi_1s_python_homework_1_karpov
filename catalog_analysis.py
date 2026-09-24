@@ -1,4 +1,4 @@
-print("Hello from catalog_analysis.py!")
+import math
 
 movies = [
     {"title": "The Dune Chronicles", "year": 2021, 
@@ -23,3 +23,40 @@ movies = [
     {"title": "Red Harbor", "year": 2018, "genres": {"action", "thriller"},
      "rating": 7.3, "duration_min": 129, "actors": ["P. Diaz", "T. Chalamet"]},
 ]
+
+# Stage 1
+def average_rating(movies):
+    total_rating, movie_count = 0, 0
+
+    for movie in movies:
+        total_rating += movie["rating"]
+        movie_count += 1
+
+    return round(total_rating / max(movie_count, 1), 1)
+
+def catalog_age_stats(movies, current_year=2026):
+    newest_age, oldest_age = 1000, 0
+    total_age, movie_count = 0, 0
+
+    for movie in movies:
+        age = current_year - movie["year"]
+
+        newest_age = min(newest_age, age)
+        oldest_age = max(oldest_age, age)
+
+        total_age += age
+        movie_count += 1
+
+    return (oldest_age, newest_age, math.ceil(total_age / max(movie_count, 1)))
+
+def duration_in_hours(minutes):
+    return f"{minutes // 60}ч {minutes % 60}м"
+
+# Stage 1
+print(average_rating(movies))
+
+print(catalog_age_stats(movies))
+
+print(duration_in_hours(125))
+
+print("Hello from catalog_analysis.py!")
