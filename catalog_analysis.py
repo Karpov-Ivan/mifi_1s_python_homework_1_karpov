@@ -124,6 +124,28 @@ def format_report_line(movie):
         f"{duration}, жанры: {genres}"
     )
 
+# Stage 5
+def titles_sorted_by_rating(movies):
+    sorted_movies = sorted(
+        movies,
+        key=lambda movie: movie["rating"],
+        reverse=True,
+    )
+
+    return [movie["title"] for movie in sorted_movies]
+
+def top_n_by_rating(movies, n=3):
+    sorted_movies = sorted(
+        movies,
+        key=lambda movie: movie["rating"],
+        reverse=True,
+    )
+
+    return [
+        (movie["title"], movie["rating"])
+        for movie in sorted_movies[:n]
+    ]
+
 print("Этап 1")
 print(f"average_rating(movies): {average_rating(movies)}")
 print(f"catalog_age_stats(movies): {catalog_age_stats(movies)}")
@@ -147,3 +169,7 @@ print("\nЭтап 4")
 print(f'normalize_title("silent hours"): {normalize_title("silent hours")}')
 print(f'make_slug("Silent Hours"): {make_slug("Silent Hours")}')
 print(f"format_report_line(movies[7]): {format_report_line(movies[7])}")
+
+print("\nЭтап 5")
+print(f"titles_sorted_by_rating(movies): {titles_sorted_by_rating(movies)}")
+print(f"top_n_by_rating(movies): {top_n_by_rating(movies)}")
