@@ -178,6 +178,21 @@ def ratings_above_average(movies):
 
     return above_average_ratings
 
+# Stage 7
+def all_genres(movies):
+    genres = set()
+
+    for movie in movies:
+        genres.update(movie["genres"])
+
+    return genres
+
+def common_actors(movie1, movie2):
+    return set(movie1["actors"]) & set(movie2["actors"])
+
+def genres_only_in_one(movies_a, movies_b):
+    return all_genres(movies_a) - all_genres(movies_b)
+
 print("Этап 1")
 print(f"average_rating(movies): {average_rating(movies)}")
 print(f"catalog_age_stats(movies): {catalog_age_stats(movies)}")
@@ -210,3 +225,11 @@ print("\nЭтап 6")
 print(f"count_by_genre(movies): {count_by_genre(movies)}")
 print(f"actor_filmography(movies): {actor_filmography(movies)}")
 print(f"ratings_above_average(movies): {ratings_above_average(movies)}")
+
+print("\nЭтап 7")
+print(f"all_genres(movies): {all_genres(movies)}")
+print(f"common_actors(movies[0], movies[3]): {common_actors(movies[0], movies[3])}")
+print(
+    "genres_only_in_one(movies[5:6], movies[:5]): "
+    f"{genres_only_in_one(movies[5:6], movies[:5])}"
+)
