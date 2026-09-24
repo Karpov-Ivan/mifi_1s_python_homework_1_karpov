@@ -70,6 +70,38 @@ def decade_label(year):
         case _ if year < 2015:
             return "старые"
 
+# Stage 3
+def print_non_comedy_titles(movies):
+    for movie in movies:
+        if "comedy" in movie["genres"]:
+            continue
+
+        print(movie["title"])
+
+def find_first_masterpiece(movies):
+    index = 0
+
+    while index < len(movies):
+        movie = movies[index]
+
+        if movie["rating"] > 9.0:
+            break
+
+        index += 1
+    else:
+        return "Шедевров не найдено"
+
+    return movie["title"]
+
+def count_long_movies(movies, threshold=120):
+    count_movies = 0
+
+    for movie in movies:
+        if movie["duration_min"] > threshold:
+            count_movies += 1
+
+    return count_movies
+
 print("Этап 1")
 print(f"average_rating(movies): {average_rating(movies)}")
 print(f"catalog_age_stats(movies): {catalog_age_stats(movies)}")
@@ -78,3 +110,13 @@ print(f"duration_in_hours(125): {duration_in_hours(125)}")
 print("\nЭтап 2")
 print(f"rating_tier(7): {rating_tier(7)}")
 print(f"decade_label(2017): {decade_label(2017)}")
+
+print("\nЭтап 3")
+print("print_non_comedy_titles(movies):")
+print_non_comedy_titles(movies)
+print(f"find_first_masterpiece(movies): {find_first_masterpiece(movies)}")
+print(
+    "find_first_masterpiece(movies[:7]): "
+    f"{find_first_masterpiece(movies[:7])}"
+)
+print(f"count_long_movies(movies): {count_long_movies(movies)}")
